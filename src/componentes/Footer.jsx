@@ -1,21 +1,35 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react/cjs/react.production.min";
 import styled from "styled-components";
 
 export default function Footer(props){
     //const [legenda , setLegenda] = useState(null);
     //const {idFilme} = useParams();
+    let controleFooter = props.controle;
 
-
+    if(controleFooter){
+        return(
+        <>
+        <Container>
+            <Banner>
+                <img src={props.img} alt="Banner do filme"/>
+            </Banner>
+            <Informacoes>
+                <span>{props.titulo}</span>
+                <span>{`${props.dia} - ${props.horario}`} </span>
+            </Informacoes>
+            
+        </Container>
+        
+        </>
+        );
+    }
     return (
         <>
         <Container>
             <Banner>
-                <img src={props.img}/>
+                <img src={props.img} alt="Banner do filme"/>
             </Banner>
             <Informacoes>
                 <span>{props.titulo}</span>
-                <span></span>
             </Informacoes>
             
         </Container>

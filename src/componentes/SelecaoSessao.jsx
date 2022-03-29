@@ -1,15 +1,13 @@
-import { useState , useEffect} from 'react';
-import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from "react-router-dom";
+import styled from "styled-components";
 import Footer from './Footer';
-
 
 export default function SelecaoSessao(){
     const [sessoes , setSessoes] = useState(null);
     const {idFilme} = useParams();
-    
-
+    let idSessao;  
 
     useEffect(() => {
         const requisicao = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`);
@@ -24,7 +22,7 @@ export default function SelecaoSessao(){
             <p>carregando...</p>
         )
     }
-
+    
     return (
         <>
         <Container>
@@ -33,13 +31,22 @@ export default function SelecaoSessao(){
             <Sessoes key={index}>
                 <h1>{dia.weekday + " - " + dia.date}</h1>
                 <Horarios>
-                    <Link to="/SelecaoAssento">
-                        {dia.showtimes.map((horario , index) => (<Horario key={index}><p>{horario.name}</p></Horario>))}
-                    </Link>
+                    
+                        {dia.showtimes.map((horario , index) => {
+                            idSessao = horario.id;
+                        return (
+                        <Link to= {`/SelecaoAssento/${idSessao}`} key={index}>
+                            <Horario >
+                            <p>{horario.name}</p>
+                            </Horario>
+                        </Link>)
+                        }
+                        )}
+                    
                 </Horarios>
             </Sessoes>))}            
         </Container>
-        <Footer img = {sessoes.posterURL} titulo={sessoes.title}/>
+        <Footer controle = {false} img = {sessoes.posterURL} titulo={sessoes.title} dia="" horario="" />
         </>
         
     );
@@ -53,6 +60,7 @@ const Container = styled.div`
     width: 85%;
     padding-bottom: 117px;
     margin-top: 25px;
+ 
 
     h1{
         margin-bottom: 22px;

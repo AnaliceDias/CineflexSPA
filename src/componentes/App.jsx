@@ -1,13 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
-
 import Header from "./Header";
-import Footer from "./Footer";
+import SelecaoAssento from "./SelecaoAssento";
 import SelecaoFilme from "./SelecaoFilme";
 import SelecaoSessao from "./SelecaoSessao";
-import SelecaoAssento from "./SelecaoAssento";
 import Sucesso from "./Sucesso";
+
 
 export default function App(){
     
@@ -19,7 +17,7 @@ export default function App(){
             <Routes>
                 <Route path="/" element={<SelecaoFilme />} />
                 <Route path="/SelecaoSessao/:idFilme" element={<SelecaoSessao />} />
-                <Route path="/SelecaoAssento" element={<SelecaoAssento /> }/>
+                <Route path="/SelecaoAssento/:idSessao" element={<SelecaoAssento /> }/>
                 <Route path="/Sucesso" element={<Sucesso /> }/>
 
             </Routes>

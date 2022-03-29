@@ -1,8 +1,7 @@
-import react from "react";
-import { useState , useEffect} from 'react';
-import styled from "styled-components";
-import { Link , useParams} from "react-router-dom";
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export default function SelecaoFilme(){
     const [filmes, setFilmes] = useState(null);
@@ -28,7 +27,10 @@ export default function SelecaoFilme(){
             <h1>Selecione o filme</h1>
             <ContainerDosFilmes>
         
-                {filmes.map( filme => <Link to={"/SelecaoSessao/"+filme.id} ><div><img src= {filme.posterURL}/></div></Link>)}  
+                {filmes.map( (filme , index) => (
+                <Link to={"/SelecaoSessao/"+filme.id} key={index}>
+                    <div><img src= {filme.posterURL} alt="Banner do filme"/></div>
+                </Link>))}  
                 
             </ContainerDosFilmes>
         </Container>
